@@ -1,2 +1,23 @@
 <!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
+<view wx:if="{{isshow}}">
+  <view class='nav-top'>
+    <view>参与互动前</view>
+    <view>不妨给自己选个心仪的称号吧</view>
+  </view>
+  <view class='content'>
+    <view class='content-list list-left'>
+      <view class='{{act == item.act?"act":""}}' wx:for="{{leftArr}}" bindtap='getname' data-item="{{item}}">{{item.name}}</view>
+    </view>
+    <view class='content-list list-mid'>
+      <view class='{{act == item.act?"act2":""}}' wx:for="{{midArr}}" bindtap='getname' data-item="{{item}}">{{item.name}}</view>
+      
+    </view>
+    <view class='content-list list-right'>
+      <view class='{{act == item.act?"act3":""}}' wx:for="{{rightArr}}" bindtap='getname' data-item="{{item}}">{{item.name}}</view>
+      
+    </view>
+  </view>
+  <view class='bottom-box'>
+    <button open-type="getUserInfo" bindgetuserinfo="login">参与互动</button>
+  </view>
+</view>

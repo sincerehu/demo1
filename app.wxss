@@ -1,45 +1,53 @@
 @import 'weui/weui.wxss';
 @import 'iconfont/iconfont.wxss';
+
 /**app.wxss**/
+
 page {
-    background-color: #fff;
-    color: #333;
-    font-size: 12px;
-    box-sizing: border-box
+  background: #1a1d2d;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: 30rpx;
 }
+
 .container {
-  height:100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 0;
   box-sizing: border-box;
-} 
+}
+
 .ellipsis {
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:1
+  -webkit-line-clamp: 1;
 }
+
 .ellipsis-2 {
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:2
+  -webkit-line-clamp: 2;
 }
+
 .ellipsis-3 {
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:3
+  -webkit-line-clamp: 3;
 }
+
 .weui-loadmore__tips_in-line {
-  background-color: #f2f2f2
+  background-color: #f2f2f2;
 }
+
 .weui-loadmore {
   background-color: #fff;
   width: 100%;
@@ -47,12 +55,14 @@ page {
   padding: 10px;
   -webkit-box-sizing: border-box;
 }
+
 .touch-active:active {
-  background-color: #f2f2f2
+  background-color: #f2f2f2;
 }
+
 .weui-bg-transparent {
-    background-color: transparent;
-    width:85%;
-    margin: 15px auto 0 auto;
-    padding: 0
+  background-color: transparent;
+  width: 85%;
+  margin: 15px auto 0 auto;
+  padding: 0;
 }

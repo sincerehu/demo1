@@ -1,4 +1,79 @@
 /* pages/index/index.wxss */
-page{
-  font-size: 28rpx
+
+page {
+  text-align: center;
+}
+
+.nav-top {
+  color: #94a1c2;
+  margin-top: 20%;
+}
+
+.content {
+  margin-top: 60rpx;
+}
+
+.content-list {
+  width: 25%;
+  float: left;
+}
+
+.list-mid {
+  margin: 0 2%;
+}
+
+.act {
+  background: linear-gradient(to bottom right, #8c6fc1, #2b73ea, #2b73ea) !important;
+}
+
+.act2 {
+  background: linear-gradient(to bottom right, #8c6fc1, #6046f4, #6046f4) !important;
+}
+
+.act3 {
+  background: linear-gradient(to bottom right, #d473f8, #cd48e8, #cd48e8) !important;
+}
+
+.list-mid view {
+  background: #281f7a;
+}
+
+.list-left {
+  margin-left: 15%;
+}
+
+.list-left  view {
+  background: #281f7a;
+}
+
+.list-right view {
+  background: #511f73;
+}
+
+.content-list view {
+  width: 66%;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-top: 25rpx;
+  border-radius: 30rpx;
+  color: #fff;
+  font-size: 26rpx;
+}
+
+.bottom-box {
+  text-align: center;
+  float: left;
+  width: 100%;
+  margin-top: 100rpx;
+}
+
+.bottom-box>view,.bottom-box>button {
+  display: inline-block;
+  padding: 1rpx 30rpx;
+  background: #511f73;
+  border-radius: 30rpx;
+  font-family: 'kzh';
+  background: linear-gradient(to bottom right, #7f78fb, #5098fc, #5098fc);
+  color: #fff;
+  font-size: 30rpx
 }

@@ -1,0 +1,23 @@
+/* pages/list/list.wxss */
+page{
+  font-size: 26rpx;
+  /* background: #fff;
+  color: #000; */
+  padding: 0 20rpx;
+}
+.weight{
+  font-weight: bold;
+  font-size: 30rpx
+}
+view{
+  margin-bottom: 20rpx
+}
+.title{
+  font-weight: bold;
+  font-size: 40rpx;
+  text-align: center;
+  padding: 20rpx 0;
+}
+.pad{
+  text-indent: 2em
+}

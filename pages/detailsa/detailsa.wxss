@@ -1,0 +1,19 @@
+/* pages/detailsa/detailsa.wxss */
+
+.img-plus-style {
+  height: 100rpx;
+  width: 100rpx;
+  position: absolute;
+  bottom: 250rpx;
+  right: 100rpx;
+  z-index: 100;
+}
+
+.img-style {
+  height: 100rpx;
+  width: 100rpx;
+  position: absolute;
+  bottom: 250rpx;
+  right: 100rpx;
+  opacity: 0;
+}

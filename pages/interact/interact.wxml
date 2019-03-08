@@ -1,0 +1,86 @@
+<view wx:if="{{isstart}}">
+  <!-- 公告模块 -->
+  <!-- <cover-view> -->
+  <scroll-view class='show-gift' bindtap='click' scroll-y scroll-with-animation scroll-top="{{giftTop}}">
+    <view wx:for="{{giftshow}}" class='show-box'>
+      <view class="init slide-anima" style=''>
+        <image class='init-img' src='{{item.headimg}}'></image>
+        <view class='init-text'>
+          <view class='init-name'>{{item.designation}} {{item.tit}}</view>
+          <view class='init-font'>送出 {{item.giftsName}}</view>
+        </view>
+        <view class='init-gift-box'>
+          <image class='init-gift gift-hudong' src="{{item.img}}"></image>
+          <view class='init-gift-nub' animation="{{slide_up2}}">x10</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- </cover-view> -->
+
+  <video id='vid' custom-cache='{{false}}' show-center-play-btn="{{a}}" style='width:{{playgift?"100%":"100%"}}' bindended="isend" controls='{{a}}' enable-progress-gesture="{{a}}" objectFit='cover' class='vid' src='http://yii.smallzhou.cn/d1.mp4'></video>
+  <image class='gift-aixin' wx:if="{{playgift}}" src='http://yii.smallzhou.cn/d1.gif?{{newdata}}'></image>
+  <view class="container {{playgift?'containers':''}}">
+
+    <!--评论盒子-->
+    <scroll-view scroll-y scroll-with-animation style='height:{{chatHeight}}px' scroll-top="{{scrollTop}}" class='scroll-box'>
+      <scroll-view class='chat {{item.isMe === true?"anima":"animaother"}}' wx:for="{{arr}}" wx:if="{{item.content}}">
+        <view class='chat-box {{item.isMe===true?"img-act content-act":""}} {{item.isMe===true?"chat-box1":"chat-box2"}}'>
+          <image src='{{item.img}}' class='header {{item.isMe===true?"img-act head-act":""}}'></image>
+          <view class='box-content {{item.isMe===true?"contents-act":""}}'>
+            {{item.content}}
+          </view>
+        </view>
+      </scroll-view>
+    </scroll-view>
+    <!-- 输入框 -->
+    <view class="comment-fixed">
+      <view class="cf-box">
+        <input class="cf-content" bindfocus="textAreaFocus" fixed="true" maxlength="100" bindblur="textAreaBlur" auto-height value="{{content}}" bindconfirm='send' bindinput="textArea" placeholder="我要评论" type="text" confirm-type="send" />
+        <!-- <view class="emoji iconfont icon-emoji" catchtap="emojiShowHide"></view> -->
+        <image catchtap="emojiShowHide" class='biaoqing' src='/images/biaoqing.png'></image>
+        <image class="cf-send touch-active" bindtap="photo" src='/images/kuozhan.png'></image>
+      </view>
+      <!--emoji表情盒子-->
+      <view class="emoji-box {{isShow ? 'emoji-move-in' : 'emoji-move-out'}} {{isLoad ? 'no-emoji-move' : ''}}">
+        <scroll-view scroll-y="true" bindscroll="emojiScroll" style="height:200px">
+          <block wx:for="{{emojis}}" wx:for-item="e" wx:key="">
+            <view class="emoji-cell">
+              <image class="touch-active" catchtap="emojiChoose" src="http://soupu.oss-cn-shanghai.aliyuncs.com/emoji/{{e.emoji}}.png" data-emoji="{{e.char}}" data-oxf="{{e.emoji}}"></image>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+  <movable-area class="gift-boxss" style="height: 400rpx; width: 30%;">
+    <movable-view class='gift-cov' x="{{x}}" y="{{y}}" out-of-bounds="true" direction="all" inertia="true">
+      <image bindtap='navget' data-gift="gift" src='/images/gift.png'></image>
+
+    </movable-view>
+  </movable-area>
+</view>
+<view class='nostart' wx:else>
+  <image class='img-start' src='/images/start.png'></image>
+  <image class='img-fanhui' bindtap='goout' src='/images/fanhui.png'></image>
+</view>
+<!-- 礼物模块 -->
+<view class='gift-bg' bindtap='closeadd' wx:if="{{isgift}}"></view>
+<view class='gift-content' wx:if="{{isgift}}">
+  <view class='gift-top'>
+    <view class='gift-list {{tit==item.gifts_name?"list-act":""}} {{item.ismid==0?"ismid":""}}' bindtap='getGifts' data-datas="{{item}}" wx:for="{{giftList}}">
+      <view class='list-item {{tit==item.gifts_name?"item-act":""}}'>
+        <image class='item-img' src='{{item.icon}}'></image>
+        <view class='item-font'>{{item.gifts_name}}</view>
+        <view class='item-zuan'>{{item.price}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='gift-bottom'>
+    <view class='gift-add' bindtap='navadd'>
+      <image src='/images/add.png'></image> 充值</view>
+    <view class='my-point'>{{masonry}}钻石</view>
+    <view class='gift-btn' bindtap='sedgifts'>发送</view>
+    <view class='tps'>TPS：互动暂未开始，发送功能尚未开放</view>
+  </view>
+</view>

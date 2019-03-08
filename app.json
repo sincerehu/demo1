@@ -1,12 +1,17 @@
 {
-  "pages":[
-    "pages/index/index"
+  "pages": [
+    "pages/index/index",
+    "pages/interact/interact",
+    "pages/recharge/recharge",
+    "pages/list/list",
+    "pages/detailsa/detailsa",
+    "pages/home/home"
   ],
-  "window":{
-    "backgroundTextStyle":"dark",
+  "window": {
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#000",
-    "navigationBarTitleText": "新天堂",
-    "navigationBarTextStyle":"#ffffff"
+    "navigationBarTitleText": "年会demo",
+    "navigationBarTextStyle": "#ffffff"
   },
-  "debug":true
+  "debug": true
 }

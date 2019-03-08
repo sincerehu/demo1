@@ -1,0 +1,23 @@
+<view class='content' style='background:url("https://fan.smallzhou.cn/uploads/bj2.png") no-repeat;background-size:100% 100%'>
+  <view class='title'>账户余额：{{masonry}}钻石</view>
+  <view class='list' wx:for="{{arr}}" bindtap='getcode' data-fee="{{item.b}}" data-code="{{item.act}}" style='background:url("https://fan.smallzhou.cn/uploads/{{act==item.act?"bj":"bj1"}}.png") no-repeat;background-size:100% 100%'>
+    <view wx:if='{{item.a!=1}}' class='left'>
+      <image src='/images/zuan2.png'></image>
+      {{item.a}}
+    </view>
+    <view wx:else class='left'>
+      <image src='/images/zuan2.png'></image>
+      <input type='number' bindblur='isok'></input>钻石
+    </view>
+    <view wx:if="{{item.a!=1}}" class='right'>¥{{item.b}}</view>
+    <view wx:else class='right' style='color:#ccc'>1钻石=¥1</view>
+  </view>
+  <view class='texts'>
+    <view class='texts-left'>阅读并同意
+      <text bindtap='nav'>《充值服务协议》</text>
+    </view>
+  </view>
+  <view class='btn10'>
+    <text bindtap='pay'>确认</text>
+  </view>
+</view>

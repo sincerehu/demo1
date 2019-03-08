@@ -1,0 +1,216 @@
+<view bindtap='closeShow'>
+  <!-- navbar 选项 -->
+  <view class='navbar'>
+    <view bindtap='isact' data-index="0" class='{{act==0?"act": ""}}'>聊天
+      <text></text>
+    </view>
+    <view bindtap='isact' data-index="1" class='{{act==1?"act": ""}}'>节目单
+      <text></text>
+    </view>
+    <view bindtap='isact' data-index="2" class='{{act==2?"act": ""}}'>个人中心
+      <text></text>
+    </view>
+  </view>
+  <!-- 聊天块 -->
+  <view wx:if="{{act == 0}}" style='height:100%'>
+    <view class="container">
+
+      <!--评论盒子-->
+      <scroll-view scroll-y scroll-with-animation style='height:{{chatHeight}}px' scroll-top="{{scrollTop}}" class='scroll-box'>
+        <scroll-view class='chat  {{item.isMe === true?"anima":"animaother"}}' wx:for="{{arr}}" wx:if="{{item.content}}">
+          <view class='chat-box'>
+            <view class='box-user'>
+              <!-- <image src='{{item.img}}' class='{{item.isMe===true?"img-act":""}}'></image> -->
+              <text class='uname {{item.isMe===true?"names-act":""}}'>{{item.designation}}</text>
+              <text class='{{item.isMe===true?"names-act":""}}'>{{item.name}}</text>
+            </view>
+            <view>
+              <image src='{{item.img}}' class='header {{item.isMe===true?"img-act":""}}'></image>
+              <view class='box-content {{item.isMe===true?"content-act":""}}'>
+                {{item.content}}
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </scroll-view>
+      <!-- 输入框 -->
+      <view class="comment-fixed">
+        <view class="cf-box">
+          <input class="cf-content" bindfocus="textAreaFocus" fixed="true" maxlength="100" bindblur="textAreaBlur" auto-height value="{{content}}" bindconfirm='send' bindinput="textArea" placeholder="我要评论" type="text" confirm-type="send" />
+          <!-- <view class="emoji iconfont icon-emoji" catchtap="emojiShowHide"></view> -->
+          <image catchtap="emojiShowHide" class='biaoqing' src='/images/biaoqing.png'></image>
+          <image class="cf-send touch-active" bindtap="photo" src='/images/kuozhan.png'></image>
+        </view>
+        <!--emoji表情盒子-->
+        <view class="emoji-box {{isShow ? 'emoji-move-in' : 'emoji-move-out'}} {{isLoad ? 'no-emoji-move' : ''}}">
+          <scroll-view scroll-y="true" bindscroll="emojiScroll" style="height:200px">
+            <block wx:for="{{emojis}}" wx:for-item="e" wx:key="">
+              <view class="emoji-cell">
+                <image class="touch-active" catchtap="emojiChoose" src="http://soupu.oss-cn-shanghai.aliyuncs.com/emoji/{{e.emoji}}.png" data-emoji="{{e.char}}" data-oxf="{{e.emoji}}"></image>
+              </view>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 节目竞猜块 -->
+  <view wx:if="{{act == 1}}" class='item-act'>
+    <view class='intro'>
+      <view class='point' bindtap='score'>
+        <image src='/images/4a.png'></image>
+        我的积分:{{center.score}}
+      </view>
+      <view class='how-play' bindtap='howPlay'>
+        <image src='/images/4b.png'></image>
+        玩法
+      </view>
+    </view>
+    <view class='list-box' wx:for="{{list}}">
+      <view class='list' style='background:#5992fc'>
+        <image wx:if="{{item.status==1}}" src='/images/muice.png' class='muice'></image>
+        <view class='list-top'>
+          <view class='texts top-left' style='color:#f5c578'>{{item.id}} {{item.title}}</view>
+          <view class='texts top-mid' style='color:#f5c578'>{{item.performername}}</view>
+          <image class='top-right' wx:if="{{item.status==1}}" data-status="{{item.status}}" data-listId="{{item.id}}" bindtap='showCover' src='/images/jingcai.png'></image>
+          <image class='top-right' wx:else bindtap='showCover' data-status="{{item.status}}" src='/images/4star2.png'></image>
+        </view>
+        <view class='list-bottom'>
+          <view class='bottom-left'>
+            赔率
+            <text>{{item.odds}}</text>
+          </view>
+          <view class='bottom-mid'>
+            参与人数
+            <text>{{item.total_actor}}</text>
+          </view>
+          <view class='bottom-right'>
+            已下注积分
+            <text>{{item.total_score}}</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{cov&&item.id==listId}}">
+        <view class='cover' bindtap='closeCover'></view>
+        <view class='cover-content'>
+          <view class='cov-top'>
+            <view class='top-name'>
+              <image src='/images/star.png'></image>
+              <text>{{item.title}}</text>
+            </view>
+            <view class='top-pl'>
+              <text>赔率</text> {{item.odds}}
+            </view>
+            <view class='top-nub'>
+              <text>参与人数</text> {{item.total_actor}}
+            </view>
+          </view>
+          <view class='cov-inner'>
+            <view wx:for="{{codes}}" class="inner-code">
+              <view bindtap='check' class='{{isCheck == item?"isCheck": ""}}' data-item="{{item}}">{{item}}
+                <text>积分</text>
+              </view>
+            </view>
+            <view class="inner-code">
+              <view bindtap='check' class='{{isCheck == "all"?"isCheck": ""}}' data-item="all">全部</view>
+            </view>
+            <view class='inner-nubs'>
+              <input type="number" placeholder='输入你的数量' bindblur="blur" value="{{inputvalue}}"></input>
+              <view class='btns'>
+                <image src='/images/btn.png' bindtap='sendScore'></image>
+              </view>
+            </view>
+            <view class='inner-mycode'>
+              <view>
+                <text> 我的积分</text>{{center.score}}
+              </view>
+              <view class='mycode-last'>
+                <text> 压中则获得 </text> {{item.end_score}}
+                <text>积分</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 个人中心 -->
+  <view class='center' wx:if="{{act == 2}}">
+
+    <view class='mycenter' wx:if="{{!gift}}">
+      <view class='yue'>
+        <view class='yue-left'>积分余额
+          <text> {{center.score}}</text>
+        </view>
+        <view class='yue-right' bindtap='navGift'>
+          <text>1</text> 礼物中心 ></view>
+      </view>
+      <view class='yue'>
+        <view class='yue-left'>钻石余额
+          <text> {{center.masonry}}</text>
+        </view>
+        <view class='yue-right' bindtap='navRecharge'>
+          <text>1</text> 充值 ></view>
+      </view>
+      <view class='git-title'>我的奖品</view>
+      <view class='get-gift' wx:for="{{reward}}">
+        <image src='{{item.icon}}'></image>
+        <view class='get-mid'>{{item.score_goods_name}}</view>
+        <view class='get-btn'>领取</view>
+      </view>
+      <view class='tip'>请在工作人员提示下进行领取操作，切勿提前领取～</view>
+    </view>
+
+    <view wx:if='{{gift}}' class='center-title'>
+      <view class='title-left'>我的积分:{{center.score}}</view>
+      <view class='title-right' bindtap='navGift'>返回 ></view>
+    </view>
+    <view wx:if='{{gift}}' class='gift-box' wx:for="{{giftList}}">
+      <image src='{{item.icon}}'></image>
+      <view class='gift-list'>
+        <view class='gift-title'>{{item.name}} {{item.description}}</view>
+        <view class='gift-point'>{{item.score_unit}}积分</view>
+        <view class='gift-text'>
+          <view class='gift-left'>
+            <view class='gift-nub'>剩余8件 限量10件</view>
+          </view>
+        </view>
+      </view>
+      <view class='gift-btn' bindtap='setGift' wx:if="{{item.status==1}}" data-id="{{item.id}}" data-goods="{{item.name}}">
+        兑换
+      </view>
+      <view class='git-btn' wx:else>已兑换 ></view>
+    </view>
+  </view>
+
+
+
+
+  <!-- <image class='gift-cov' bindtap='navget' data-gift="gift" src='/images/3gi.png'></image>
+  <image class='hudong' bindtap='navget' src='/images/3hu.png'></image> -->
+  <!-- 积分玩法介绍 -->
+  <view wx:if="{{getscore||howPlay}}" bindtap='closeinter' class='bg-cover'> </view>
+  <image wx:if="{{getscore}}" class='getscro' src='/images/41-1.png'></image>
+  <image wx:if="{{howPlay}}" class='getscro' src='/images/42-3.png'></image>
+</view>
+<!-- tip -->
+<image wx:if="{{tip}}" class='tip1' src='/images/21.png'></image>
+<view wx:if="{{tip}}" class='tip-gift'>
+  <image src="/images/gift.png" data-gift="gift" class="" bindtap="navget"></image>
+  <view>已放入礼物中心</view>
+</view>
+<view wx:if="{{tip}}" class='tipbg' bindtap='gettip'></view>
+  <!-- 导航 -->
+
+  <movable-area class="gift-boxss" style="height: 400rpx; width: 70rpx;">
+    <movable-view class='gift-cov' x="{{x}}" y="{{y}}" out-of-bounds="true" direction="all" inertia="true">
+      <view>
+        <image src="/images/chongzhi.png" data-add="add" class="img-style" animation="{{animCollect}}" bindtap="navget"></image>
+        <image src="/images/3gi.png" data-gift="gift" class="img-style" animation="{{animTranspond}}" bindtap="navget"></image>
+        <image src="/images/3hu.png" class="img-style" animation="{{animInput}}" bindtap="navget"></image>
+        <image src="/images/jia.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
+      </view>
+    </movable-view>
+  </movable-area>
